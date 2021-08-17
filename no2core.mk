@@ -8,6 +8,10 @@ RTL_SRCS_no2hyperbus := $(addprefix rtl/, \
 	hbus_memctrl.v \
 )
 
+SIM_SRCS_no2hyperbus := $(addprefix sim/, \
+	s27kl0642.v \
+)
+
 TESTBENCHES_no2hyperbus := \
 	hbus_memctrl_tb \
 	$(NULL)
