@@ -1,5 +1,7 @@
 CORE := no2hyperbus
 
+DEPS_no2hyperbus := no2ice40
+
 RTL_SRCS_no2hyperbus := $(addprefix rtl/, \
 	hbus_dline.v \
 	hbus_phy_ice40.v \
