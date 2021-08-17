@@ -1,5 +1,5 @@
 /*
- * hram_dline.v
+ * hbus_dline.v
  *
  * vim: ts=4 sw=4
  *
@@ -33,7 +33,7 @@
 
 `default_nettype none
 
-module hram_dline #(
+module hbus_dline #(
 	parameter integer N = 3
 )(
 	input  wire di,

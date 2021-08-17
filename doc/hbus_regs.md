@@ -1,4 +1,4 @@
-HyperRAM controller Registers
+HyperBus controller Registers
 =============================
 
 

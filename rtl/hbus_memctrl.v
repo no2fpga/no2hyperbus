@@ -1,5 +1,5 @@
 /*
- * hram_top.v
+ * hbus_memctrl.v
  *
  * vim: ts=4 sw=4
  *
@@ -33,7 +33,7 @@
 
 `default_nettype none
 
-module hram_top (
+module hbus_memctrl (
 	// PHY interface
 	output reg  [ 1:0] phy_ck_en,
 
@@ -328,7 +328,7 @@ module hram_top (
 	assign cap_in[1] = (state == ST_DATA_READ) & ~cmd_is_wb;
 	assign cap_in[0] = (state == ST_DATA_READ) & (cmd_is_wb | xfer_last);
 
-	hram_dline #(
+	hbus_dline #(
 		.N(3)
 	) cap_I[1:0] (
 		.di(cap_in),

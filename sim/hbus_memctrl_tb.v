@@ -1,5 +1,5 @@
 /*
- * hram_top_tb.v
+ * hbus_memctrl_tb.v
  *
  * vim: ts=4 sw=4
  *
@@ -34,17 +34,17 @@
 `default_nettype none
 `timescale 1ns / 100ps
 
-module hram_top_tb;
+module hbus_memctrl_tb;
 
 	// Signals
 	// -------
 
 	// HyperRAM pins
-	wire [7:0] hram_dq;
-	wire       hram_rwds;
-	wire       hram_ck;
-	wire [3:0] hram_cs_n;
-	wire       hram_rst_n;
+	wire  [7:0] hbus_dq;
+	wire        hbus_rwds;
+	wire        hbus_ck;
+	wire  [3:0] hbus_cs_n;
+	wire        hbus_rst_n;
 
 	// Memory interface
 	wire [ 1:0] mi_addr_cs;
@@ -89,20 +89,20 @@ module hram_top_tb;
 	// ---------------
 
 	initial begin
-		$dumpfile("hram_top_tb.vcd");
-		$dumpvars(0,hram_top_tb);
+		$dumpfile("hbus_memctrl_tb.vcd");
+		$dumpvars(0,hbus_memctrl_tb);
 	end
 
 
 	// DUT
 	// ---
 
-	hram_top dut_I (
-		.hram_dq(hram_dq),
-		.hram_rwds(hram_rwds),
-		.hram_ck(hram_ck),
-		.hram_cs_n(hram_cs_n),
-		.hram_rst_n(hram_rst_n),
+	hbus_memctrl dut_I (
+		.hbus_dq(hbus_dq),
+		.hbus_rwds(hbus_rwds),
+		.hbus_ck(hbus_ck),
+		.hbus_cs_n(hbus_cs_n),
+		.hbus_rst_n(hbus_rst_n),
 		.mi_addr_cs(mi_addr_cs),
 		.mi_addr(mi_addr),
 		.mi_len(mi_len),

@@ -1,5 +1,5 @@
 /*
- * hram_phy_ice40.v
+ * hbus_phy_ice40.v
  *
  * vim: ts=4 sw=4
  *
@@ -33,15 +33,15 @@
 
 `default_nettype none
 
-module hram_phy_ice40 #(
+module hbus_phy_ice40 #(
 	parameter integer SERDES_GRP_BASE = 0
 )(
 	// HyperRAM pins
-	inout  wire [7:0] hram_dq,
-	inout  wire       hram_rwds,
-	output wire       hram_ck,
-	output wire [3:0] hram_cs_n,
-	output wire       hram_rst_n,
+	inout  wire [7:0] hbus_dq,
+	inout  wire       hbus_rwds,
+	output wire       hbus_ck,
+	output wire [3:0] hbus_cs_n,
+	output wire       hbus_rst_n,
 
 	// PHY interface
 	input  wire [ 1:0] phy_ck_en,
@@ -127,7 +127,7 @@ module hram_phy_ice40 #(
 	SB_IO #(
 		.PIN_TYPE(6'b1100_01)
 	) io_ck_I (
-		.PACKAGE_PIN(hram_ck),
+		.PACKAGE_PIN(hbus_ck),
 		.OUTPUT_ENABLE(1'b1),
 		.D_OUT_0(serdes_ck_dout[0]),
 		.D_OUT_1(serdes_ck_dout[1]),
@@ -177,7 +177,7 @@ module hram_phy_ice40 #(
 	SB_IO #(
 		.PIN_TYPE(6'b 1101_00)
 	) io_rwds_I (
-		.PACKAGE_PIN(hram_rwds),
+		.PACKAGE_PIN(hbus_rwds),
 		.OUTPUT_ENABLE(serdes_rwds_oe[0]),
 		.D_OUT_0(serdes_rwds_dout[0]),
 		.D_IN_0(serdes_rwds_din[0]),
@@ -235,7 +235,7 @@ module hram_phy_ice40 #(
 			SB_IO #(
 				.PIN_TYPE(6'b 1101_00)
 			) io_dq_I (
-				.PACKAGE_PIN(hram_dq[i]),
+				.PACKAGE_PIN(hbus_dq[i]),
 				.OUTPUT_ENABLE(serdes_dq_oe[i][0]),
 				.D_OUT_0(serdes_dq_dout[i][0]),
 				.D_IN_0(serdes_dq_din[i][0]),
@@ -257,12 +257,12 @@ module hram_phy_ice40 #(
 	SB_IO #(
 		.PIN_TYPE(6'b 1101_01)
 	) io_cs_n_I[3:0] (
-		.PACKAGE_PIN(hram_cs_n),
+		.PACKAGE_PIN(hbus_cs_n),
 		.OUTPUT_ENABLE(1'b1),
 		.D_OUT_0(iob_cs_n),
 		.OUTPUT_CLK(clk_4x)
 	);
 
-	assign hram_rst_n = phy_rst_n;
+	assign hbus_rst_n = phy_rst_n;
 
 endmodule
