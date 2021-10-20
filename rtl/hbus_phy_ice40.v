@@ -10,14 +10,18 @@
 `default_nettype none
 
 module hbus_phy_ice40 #(
-	parameter integer SERDES_GRP_BASE = 0
+	parameter integer N_CS = 4,
+	parameter integer SERDES_GRP_BASE = 0,
+
+	// auto-set
+	parameter integer CL = N_CS - 1
 )(
 	// HyperRAM pins
-	inout  wire [7:0] hbus_dq,
-	inout  wire       hbus_rwds,
-	output wire       hbus_ck,
-	output wire [3:0] hbus_cs_n,
-	output wire       hbus_rst_n,
+	inout  wire  [7:0] hbus_dq,
+	inout  wire        hbus_rwds,
+	output wire        hbus_ck,
+	output wire [CL:0] hbus_cs_n,
+	output wire        hbus_rst_n,
 
 	// PHY interface
 	input  wire [ 1:0] phy_ck_en,
@@ -30,7 +34,7 @@ module hbus_phy_ice40 #(
 	input  wire [31:0] phy_dq_out,
 	input  wire [ 1:0] phy_dq_oe,
 
-	input  wire [ 3:0] phy_cs_n,
+	input  wire [CL:0] phy_cs_n,
 	input  wire        phy_rst_n,
 
 	// PHY configuration
@@ -64,7 +68,7 @@ module hbus_phy_ice40 #(
 	wire [1:0] serdes_dq_dout[0:8];
 	wire [1:0] serdes_dq_oe[0:8];
 
-	reg  [3:0] iob_cs_n;
+	reg [CL:0] iob_cs_n;
 
 
 	// Config
@@ -232,7 +236,7 @@ module hbus_phy_ice40 #(
 
 	SB_IO #(
 		.PIN_TYPE(6'b 1101_01)
-	) io_cs_n_I[3:0] (
+	) io_cs_n_I[CL:0] (
 		.PACKAGE_PIN   (hbus_cs_n),
 		.OUTPUT_ENABLE (1'b1),
 		.D_OUT_0       (iob_cs_n),
